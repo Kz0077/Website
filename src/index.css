@@ -1,0 +1,321 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+
+@theme inline {
+  --color-background: #F3EAE1;
+  --color-foreground: #2A1A1A;
+  
+  --color-primary: #8A2128;
+  --color-primary-foreground: #FFFFFF;
+  
+  --color-accent: #DBB774;
+  --color-accent-foreground: #FFFFFF;
+
+  --color-muted: #E6DCD1;
+  --color-muted-foreground: #6A5A5A;
+
+  --color-card: #FFFFFF;
+  --color-card-foreground: #2A1A1A;
+  
+  --color-border: #E0D3C7;
+
+  --color-serase-heading: #241F1D;
+
+  /* Radius scale: compact / card / section */
+  --radius-serase-sm: 1.5rem;
+  --radius-serase-card: 2rem;
+  --radius-serase-section: 2.5rem;
+
+  /* Warm shadow scale */
+  --shadow-serase-card: 0 14px 36px rgba(82, 49, 43, 0.06);
+  --shadow-serase-elevated: 0 22px 52px rgba(82, 49, 43, 0.10);
+  --shadow-serase-hero: 0 30px 76px rgba(82, 49, 43, 0.14);
+  
+  --radius-full: 9999px;
+  --radius-xl: 24px;
+
+  /* 统一规范的动画变量集合 */
+  --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce-slow: bounce-slow 3s infinite;
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 6s linear infinite;
+  --animate-spin-slow: spin-slow 60s linear infinite;
+}
+
+@layer base {
+  :root {
+    /* =========================================================
+       GLOBAL FONT
+       Change ONLY this line to update the whole website font.
+       ========================================================= */
+    --font-site: "Indie Flower", cursive;
+
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --border: var(--color-border);
+  }
+
+  html,
+  body,
+  #root {
+    font-family: var(--font-site);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /*
+   * Force the same site font across all pages/components.
+   * !important intentionally overrides local TSX fontFamily styles
+   * such as Georgia/serif so changing --font-site updates everything.
+   */
+  body *,
+  button,
+  input,
+  textarea,
+  select,
+  option {
+    font-family: var(--font-site) !important;
+  }
+}
+
+@layer base {
+  button:focus-visible, 
+  a:focus-visible, 
+  input:focus-visible, 
+  select:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+}
+
+
+@layer components {
+  /* ---------- Typography ---------- */
+  .serase-h1 {
+    color: var(--color-serase-heading);
+    font-size: clamp(2.75rem, 4vw, 3.5rem);
+    line-height: 1.04;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+
+  .serase-lead {
+    color: var(--muted-foreground);
+    font-size: 1.125rem;
+    line-height: 1.75;
+    font-weight: 500;
+  }
+
+  .serase-eyebrow {
+    font-size: 0.8125rem;
+    line-height: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .serase-eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgb(138 33 40 / 0.15);
+    border-radius: 9999px;
+    background: rgb(138 33 40 / 0.05);
+    color: var(--primary);
+  }
+
+  /* ---------- Semantic content widths ---------- */
+  .serase-container-reading {
+    width: 100%;
+    max-width: 56rem;
+    margin-inline: auto;
+  }
+
+  .serase-container-content {
+    width: 100%;
+    max-width: 64rem;
+    margin-inline: auto;
+  }
+
+  .serase-container-wide {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+
+  .serase-container-hero {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+  }
+
+  /* ---------- Icon-container scale ---------- */
+  .serase-icon-sm,
+  .serase-icon-md,
+  .serase-icon-lg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .serase-icon-sm {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .serase-icon-md {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .serase-icon-lg {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  /* ---------- Card surface ---------- */
+  .serase-card-border {
+    border-color: rgb(224 211 199 / 0.78);
+  }
+
+  .serase-shadow-card {
+    box-shadow: var(--shadow-serase-card);
+  }
+
+  .serase-shadow-elevated {
+    box-shadow: var(--shadow-serase-elevated);
+  }
+
+
+  /* ---------- Interaction Motion Scale ----------
+     nav/editorial CTA: 2px lift
+     transaction/form action: 1px lift + 0.98 active press
+     card: 4px lift, no scale
+     decorative floating micro-card: 3px lift + 1.03 scale
+  */
+  .serase-interact-nav,
+  .serase-interact-action,
+  .serase-interact-card,
+  .serase-interact-float {
+    transition-property: transform, box-shadow, border-color, background-color, color, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .serase-interact-nav:hover {
+      transform: translateY(-2px);
+    }
+
+    .serase-interact-action:hover {
+      transform: translateY(-1px);
+    }
+
+    .serase-interact-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .serase-interact-float:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+  }
+
+  .serase-interact-nav:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  .serase-interact-action:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .serase-interact-card:active,
+  .serase-interact-float:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .serase-interact-nav,
+    .serase-interact-action,
+    .serase-interact-card,
+    .serase-interact-float {
+      transition-duration: 0.01ms;
+      transform: none !important;
+    }
+  }
+
+  /* ---------- Button-shape semantics ----------
+     Navigation/editorial CTA = pill.
+     Transaction/form/store/purchase action = soft rectangle.
+  */
+  .serase-btn-nav {
+    border-radius: 9999px;
+  }
+
+  .serase-btn-action {
+    border-radius: 1rem;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+  }
+  @supports (scrollbar-width: none) {
+    .scrollbar-hide {
+      scrollbar-width: none;
+    }
+  }
+
+  /* Keyframes 集合 */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 15px 5px rgba(138, 33, 40, 0.15); }
+    50% { box-shadow: 0 0 25px 10px rgba(138, 33, 40, 0.35); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(-15%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}

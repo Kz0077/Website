@@ -1,0 +1,21 @@
+{
+  "name": "Serasé Dating App",
+  "short_name": "Serasé",
+  "description": "Experience dating without the noise. 100% verified profiles, AI-powered matchmaking, and timed connections that bring romance back to reality.",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#8B1E2D",
+  "background_color": "#F3EAE1",
+  "display": "standalone",
+  "start_url": "/"
+}

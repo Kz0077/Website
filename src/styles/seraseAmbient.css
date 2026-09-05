@@ -1,1 +1,792 @@
 
+.serase-site-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: clip;
+  background: transparent;
+}
+
+.serase-main {
+  position: relative;
+  z-index: 1;
+}
+
+.serase-global-footer {
+  position: relative;
+  z-index: 2;
+}
+
+.serase-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% -5%, rgba(255,255,255,.94) 0%, rgba(255,255,255,0) 47%),
+    linear-gradient(180deg, #FBF7F3 0%, #F6ECE5 48%, #FCF9F6 100%);
+}
+
+.serase-aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(clamp(78px, 10vw, 165px));
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.serase-aurora-primary {
+  width: clamp(420px, 58vw, 1080px);
+  height: clamp(340px, 48vw, 820px);
+  left: clamp(-360px, -14vw, -90px);
+  top: clamp(-220px, -10vw, -50px);
+  background:
+    radial-gradient(circle at 48% 45%,
+      rgba(117,28,33,.38) 0%,
+      rgba(155,61,70,.24) 31%,
+      rgba(202,124,125,.08) 56%,
+      transparent 74%);
+  animation: serase-drift-a 16s cubic-bezier(.45,0,.55,1) infinite alternate,
+             serase-breathe 9.5s ease-in-out infinite;
+}
+
+.serase-aurora-blush {
+  width: clamp(480px, 62vw, 1180px);
+  height: clamp(330px, 46vw, 790px);
+  right: clamp(-420px, -17vw, -110px);
+  top: 19vh;
+  background:
+    radial-gradient(circle at 50% 48%,
+      rgba(220,157,151,.36) 0%,
+      rgba(232,192,177,.21) 42%,
+      transparent 73%);
+  animation: serase-drift-b 19s cubic-bezier(.45,0,.55,1) infinite alternate,
+             serase-breathe 11.5s ease-in-out -3s infinite;
+}
+
+.serase-aurora-gold {
+  width: clamp(360px, 47vw, 860px);
+  height: clamp(290px, 39vw, 680px);
+  left: 30vw;
+  bottom: clamp(-320px, -13vw, -80px);
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(218,179,107,.31) 0%,
+      rgba(232,204,151,.17) 42%,
+      transparent 73%);
+  animation: serase-drift-c 22s cubic-bezier(.45,0,.55,1) infinite alternate,
+             serase-breathe 13s ease-in-out -6s infinite;
+}
+
+.serase-frequency-field {
+  position: absolute;
+  inset: -18%;
+  opacity: .22;
+  transform: rotate(-7deg) scale(1.1);
+  background-image:
+    repeating-radial-gradient(
+      ellipse at 47% 34%,
+      rgba(117,28,33,.09) 0 1px,
+      transparent 1px 36px
+    );
+  -webkit-mask-image:
+    radial-gradient(ellipse at center, #000 0%, rgba(0,0,0,.58) 38%, transparent 76%);
+  mask-image:
+    radial-gradient(ellipse at center, #000 0%, rgba(0,0,0,.58) 38%, transparent 76%);
+  animation: serase-frequency-float 22s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+
+.serase-ribbon {
+  position: absolute;
+  width: min(92vw, 1320px);
+  height: 180px;
+  left: 50%;
+  border: 1px solid rgba(117,28,33,.055);
+  border-radius: 50%;
+  opacity: .56;
+  transform-origin: center;
+}
+
+.serase-ribbon-a {
+  top: 31vh;
+  transform: translateX(-50%) rotate(-9deg) skewX(-10deg);
+  animation: serase-ribbon-a 26s ease-in-out infinite alternate;
+}
+
+.serase-ribbon-b {
+  top: 68vh;
+  transform: translateX(-50%) rotate(8deg) skewX(8deg) scale(.86);
+  border-color: rgba(190,145,75,.065);
+  animation: serase-ribbon-b 29s ease-in-out infinite alternate;
+}
+
+.serase-soft-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.20),
+      transparent 15%,
+      transparent 85%,
+      rgba(255,255,255,.18)),
+    radial-gradient(ellipse at center,
+      transparent 47%,
+      rgba(88,44,40,.038) 100%);
+}
+
+.serase-grain {
+  position: absolute;
+  inset: -35%;
+  opacity: .026;
+  mix-blend-mode: multiply;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  background-size: 190px 190px;
+}
+
+.serase-home-shell .serase-ambient {
+  background:
+    radial-gradient(ellipse at 70% 6%, rgba(255,255,255,.97) 0%, transparent 44%),
+    radial-gradient(ellipse at 16% 12%, rgba(117,28,33,.085) 0%, transparent 43%),
+    linear-gradient(180deg, #FBF5F1 0%, #F3E5DD 46%, #FCF9F6 100%);
+}
+
+.serase-home-shell .serase-aurora-primary { opacity: 1; }
+.serase-home-shell .serase-aurora-blush { opacity: .98; }
+.serase-home-shell .serase-aurora-gold { opacity: .93; }
+.serase-home-shell .serase-frequency-field { opacity: .38; }
+.serase-home-shell .serase-ribbon { opacity: .76; }
+
+.serase-inner-shell .serase-aurora-primary { opacity: .76; }
+.serase-inner-shell .serase-aurora-blush { opacity: .68; }
+.serase-inner-shell .serase-aurora-gold { opacity: .60; }
+.serase-inner-shell .serase-frequency-field { opacity: .15; }
+.serase-inner-shell .serase-ribbon { opacity: .36; }
+
+.serase-main > * {
+  background-color: transparent !important;
+}
+
+.serase-glass-header {
+  position: sticky;
+  z-index: 80 !important;
+  isolation: isolate;
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.serase-global-footer {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(248,240,233,.95));
+  -webkit-backdrop-filter: blur(22px) saturate(122%);
+  backdrop-filter: blur(22px) saturate(122%);
+  box-shadow: 0 -20px 60px rgba(91,51,45,.05);
+}
+
+@keyframes serase-breathe {
+  0%, 100% { scale: .93; opacity: .72; }
+  50% { scale: 1.11; opacity: 1; }
+}
+
+@keyframes serase-drift-a {
+  0% { translate: -7% -5%; rotate: -3deg; }
+  100% { translate: 15% 11%; rotate: 5deg; }
+}
+
+@keyframes serase-drift-b {
+  0% { translate: 7% -7%; rotate: 4deg; }
+  100% { translate: -15% 13%; rotate: -6deg; }
+}
+
+@keyframes serase-drift-c {
+  0% { translate: -9% 8%; rotate: -3deg; }
+  100% { translate: 14% -11%; rotate: 6deg; }
+}
+
+@keyframes serase-frequency-float {
+  0% { transform: rotate(-7deg) scale(1.07) translate3d(-1.5%, -1%, 0); }
+  100% { transform: rotate(-4deg) scale(1.18) translate3d(2%, 1.7%, 0); }
+}
+
+@keyframes serase-ribbon-a {
+  0% { transform: translateX(-50%) rotate(-9deg) skewX(-10deg) scaleX(.94); }
+  100% { transform: translateX(-50%) rotate(-4deg) skewX(-4deg) scaleX(1.08); }
+}
+
+@keyframes serase-ribbon-b {
+  0% { transform: translateX(-50%) rotate(8deg) skewX(8deg) scale(.84); }
+  100% { transform: translateX(-50%) rotate(3deg) skewX(3deg) scale(.94); }
+}
+
+@media (max-width: 767px) {
+  .serase-aurora-primary { left: -58%; top: -6%; }
+  .serase-aurora-blush { right: -68%; top: 34%; }
+  .serase-aurora-gold { left: 3%; bottom: -14%; }
+
+  .serase-frequency-field {
+    inset: -8% -48%;
+    opacity: .10;
+  }
+
+  .serase-home-shell .serase-frequency-field { opacity: .17; }
+
+  .serase-ribbon {
+    width: 150vw;
+    height: 120px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serase-aurora,
+  .serase-frequency-field,
+  .serase-ribbon {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   Smart header
+   Size state:
+   - full at top
+   - compact after scroll
+   - full again on hover
+
+   Surface state:
+   - transparent only at page top
+   - glass whenever scrollY > 36, even when hover-expanded
+   ========================================================= */
+.serase-glass-header {
+  transition:
+    background-color 360ms cubic-bezier(.22, 1, .36, 1),
+    box-shadow 360ms cubic-bezier(.22, 1, .36, 1),
+    border-color 360ms cubic-bezier(.22, 1, .36, 1),
+    backdrop-filter 360ms cubic-bezier(.22, 1, .36, 1),
+    -webkit-backdrop-filter 360ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.serase-header-inner {
+  transition:
+    height 360ms cubic-bezier(.22, 1, .36, 1),
+    padding 360ms cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Surface state is based ONLY on scroll position.
+   This prevents a hovered/expanded scrolled header from becoming transparent. */
+.serase-header-surface-glass {
+  background-color: rgba(252,248,244,.86);
+  border-bottom: 1px solid rgba(255,255,255,.64);
+  -webkit-backdrop-filter: blur(26px) saturate(145%);
+  backdrop-filter: blur(26px) saturate(145%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.76),
+    0 10px 30px rgba(83,44,39,.072);
+}
+
+.serase-header-surface-transparent {
+  background: transparent !important;
+  border: 0 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 767px) {
+  .serase-header-inner {
+    height: 72px !important;
+  }
+}
+
+
+/* =========================================================
+   WOW v2 — cinematic depth layer
+   Stronger on Home, restrained on inner pages.
+   ========================================================= */
+
+/* A soft "light stage" that gives the page a center of gravity. */
+.serase-ambient::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 46% 38% at 66% 20%,
+      rgba(255,255,255,.78) 0%,
+      rgba(255,247,240,.36) 32%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 42% 34% at 28% 34%,
+      rgba(181,72,80,.12) 0%,
+      rgba(211,129,117,.075) 45%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 34% 25% at 54% 76%,
+      rgba(220,177,102,.10) 0%,
+      transparent 72%
+    );
+  filter: blur(10px);
+  animation: serase-stage-breathe 14s ease-in-out infinite alternate;
+}
+
+/* Soft diagonal beams — subtle, luxury-launch feel. */
+.serase-ambient::after {
+  content: "";
+  position: absolute;
+  inset: -18% -12%;
+  pointer-events: none;
+  opacity: .42;
+  background:
+    linear-gradient(
+      118deg,
+      transparent 0%,
+      transparent 28%,
+      rgba(255,255,255,.13) 35%,
+      rgba(255,255,255,.28) 43%,
+      rgba(255,255,255,.08) 51%,
+      transparent 61%
+    ),
+    linear-gradient(
+      72deg,
+      transparent 0%,
+      transparent 43%,
+      rgba(155,70,74,.035) 49%,
+      rgba(229,186,116,.045) 55%,
+      transparent 64%
+    );
+  transform: translate3d(-3%,0,0);
+  animation: serase-light-sweep 18s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+
+/* Make the auroras feel less like blobs and more like depth. */
+.serase-home-shell .serase-aurora-primary {
+  background:
+    radial-gradient(circle at 46% 44%,
+      rgba(117,28,33,.36) 0%,
+      rgba(159,62,71,.22) 29%,
+      rgba(206,125,126,.105) 54%,
+      transparent 76%);
+  filter: blur(clamp(88px, 11vw, 178px));
+}
+
+.serase-home-shell .serase-aurora-blush {
+  background:
+    radial-gradient(circle at 50% 48%,
+      rgba(223,157,151,.34) 0%,
+      rgba(238,197,177,.19) 41%,
+      transparent 74%);
+  filter: blur(clamp(92px, 11vw, 180px));
+}
+
+.serase-home-shell .serase-aurora-gold {
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(221,179,102,.30) 0%,
+      rgba(239,207,150,.14) 42%,
+      transparent 74%);
+}
+
+/* Hero-only glow field: makes the first viewport feel more dimensional. */
+.serase-home-shell .serase-ambient {
+  background:
+    radial-gradient(ellipse at 72% 5%, rgba(255,255,255,.985) 0%, transparent 41%),
+    radial-gradient(ellipse at 16% 15%, rgba(117,28,33,.115) 0%, transparent 44%),
+    radial-gradient(ellipse at 74% 62%, rgba(230,175,103,.075) 0%, transparent 40%),
+    linear-gradient(180deg, #FCF7F3 0%, #F2E3DA 42%, #F9F1EB 69%, #FCF9F6 100%);
+}
+
+/* A more visible but still elegant "connection energy" field. */
+.serase-home-shell .serase-frequency-field {
+  opacity: .33;
+  background-image:
+    repeating-radial-gradient(
+      ellipse at 53% 34%,
+      rgba(117,28,33,.105) 0 1px,
+      transparent 1px 38px
+    );
+  -webkit-mask-image:
+    radial-gradient(ellipse at 56% 35%, #000 0%, rgba(0,0,0,.66) 36%, transparent 72%);
+  mask-image:
+    radial-gradient(ellipse at 56% 35%, #000 0%, rgba(0,0,0,.66) 36%, transparent 72%);
+}
+
+/* Turn the thin ribbons into a layered orbital motif. */
+.serase-home-shell .serase-ribbon {
+  border-width: 1px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.12) inset,
+    0 0 80px rgba(138,33,40,.025);
+}
+
+.serase-home-shell .serase-ribbon-a {
+  opacity: .82;
+  border-color: rgba(138,33,40,.09);
+}
+
+.serase-home-shell .serase-ribbon-b {
+  opacity: .72;
+  border-color: rgba(205,164,94,.10);
+}
+
+/* Small luminous "connection nodes", created without image assets. */
+.serase-home-shell .serase-soft-vignette {
+  background:
+    radial-gradient(circle at 18% 26%, rgba(151,43,53,.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 18%, rgba(218,174,90,.22) 0 2px, transparent 3px),
+    radial-gradient(circle at 86% 63%, rgba(151,43,53,.12) 0 2px, transparent 3px),
+    radial-gradient(circle at 34% 78%, rgba(218,174,90,.15) 0 2px, transparent 3px),
+    linear-gradient(90deg, rgba(255,255,255,.16), transparent 13%, transparent 87%, rgba(255,255,255,.14)),
+    radial-gradient(ellipse at center, transparent 45%, rgba(82,42,38,.045) 100%);
+}
+
+/* Give the header a slightly floating edge against the richer background. */
+.serase-home-shell .serase-header-surface-glass {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.78),
+    0 14px 38px rgba(83,44,39,.065);
+}
+
+/* Inner pages: only a hint of the cinematic layer. */
+.serase-inner-shell .serase-ambient::before {
+  opacity: .78;
+}
+
+.serase-inner-shell .serase-ambient::after {
+  opacity: .32;
+}
+
+/* Slight depth separation for page content without touching card designs. */
+.serase-main {
+  transform: translateZ(0);
+}
+
+@keyframes serase-stage-breathe {
+  0% {
+    transform: translate3d(-1.5%, -1%, 0) scale(.98);
+    opacity: .76;
+  }
+  100% {
+    transform: translate3d(1.5%, 1.25%, 0) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes serase-light-sweep {
+  0% {
+    transform: translate3d(-5%, -1%, 0) rotate(-1deg);
+    opacity: .30;
+  }
+  100% {
+    transform: translate3d(4%, 1.5%, 0) rotate(1deg);
+    opacity: .54;
+  }
+}
+
+@media (max-width: 767px) {
+  .serase-ambient::after {
+    opacity: .22;
+  }
+
+  .serase-home-shell .serase-frequency-field {
+    opacity: .20;
+  }
+
+  .serase-home-shell .serase-ribbon-a {
+    opacity: .48;
+  }
+
+  .serase-home-shell .serase-ribbon-b {
+    opacity: .38;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serase-ambient::before,
+  .serase-ambient::after {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   WOW v3 — clearer global motion
+   These layers are shared by every page through AppLayout.
+   ========================================================= */
+
+.serase-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  border-radius: 9999px;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.serase-orbit-a {
+  width: min(88vw, 1180px);
+  height: min(45vw, 560px);
+  border: 1px solid rgba(138,33,40,.085);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.12),
+    0 0 75px rgba(138,33,40,.025);
+  animation: serase-orbit-a-spin 34s linear infinite;
+}
+
+.serase-orbit-b {
+  width: min(72vw, 980px);
+  height: min(34vw, 440px);
+  border: 1px solid rgba(210,167,85,.095);
+  animation: serase-orbit-b-spin 42s linear infinite reverse;
+}
+
+.serase-orbit-node {
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  border-radius: 9999px;
+  transform: translateX(-50%);
+}
+
+.serase-orbit-node-gold {
+  width: 10px;
+  height: 10px;
+  background: #D4A74D;
+  box-shadow:
+    0 0 12px rgba(212,167,77,.80),
+    0 0 30px rgba(212,167,77,.42);
+}
+
+.serase-orbit-node-burgundy {
+  width: 9px;
+  height: 9px;
+  background: #9C2D36;
+  box-shadow:
+    0 0 12px rgba(156,45,54,.70),
+    0 0 28px rgba(156,45,54,.35);
+}
+
+/* Moving diagonal illumination. */
+.serase-light-beam {
+  position: absolute;
+  width: 34vw;
+  min-width: 340px;
+  height: 145vh;
+  top: -20vh;
+  pointer-events: none;
+  filter: blur(22px);
+  transform: rotate(18deg);
+  will-change: transform, opacity;
+}
+
+.serase-light-beam-a {
+  left: -24vw;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255,255,255,.035) 20%,
+      rgba(255,255,255,.23) 48%,
+      rgba(255,245,235,.075) 70%,
+      transparent 100%
+    );
+  animation: serase-beam-cross-a 20s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+
+.serase-light-beam-b {
+  right: -28vw;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(196,100,101,.025) 25%,
+      rgba(225,184,118,.12) 50%,
+      rgba(255,255,255,.10) 68%,
+      transparent 100%
+    );
+  animation: serase-beam-cross-b 25s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+
+/* Slow travelling connection points. */
+.serase-ambient-node {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.serase-ambient-node-a {
+  left: 12%;
+  top: 20%;
+  background: rgba(151,43,53,.70);
+  box-shadow: 0 0 18px rgba(151,43,53,.45);
+  animation: serase-node-a 14s ease-in-out infinite alternate;
+}
+
+.serase-ambient-node-b {
+  right: 16%;
+  top: 29%;
+  background: rgba(218,174,90,.78);
+  box-shadow: 0 0 18px rgba(218,174,90,.50);
+  animation: serase-node-b 17s ease-in-out infinite alternate;
+}
+
+.serase-ambient-node-c {
+  left: 33%;
+  bottom: 15%;
+  width: 5px;
+  height: 5px;
+  background: rgba(151,43,53,.52);
+  box-shadow: 0 0 14px rgba(151,43,53,.36);
+  animation: serase-node-c 19s ease-in-out infinite alternate;
+}
+
+.serase-ambient-node-d {
+  right: 28%;
+  bottom: 24%;
+  width: 6px;
+  height: 6px;
+  background: rgba(218,174,90,.58);
+  box-shadow: 0 0 16px rgba(218,174,90,.38);
+  animation: serase-node-d 16s ease-in-out infinite alternate;
+}
+
+/* Home is richer; inner pages remain visibly animated, not static. */
+.serase-home-shell .serase-orbit {
+  opacity: .88;
+}
+
+.serase-home-shell .serase-light-beam {
+  opacity: .78;
+}
+
+.serase-home-shell .serase-ambient-node {
+  opacity: .92;
+}
+
+.serase-inner-shell .serase-orbit {
+  opacity: .46;
+}
+
+.serase-inner-shell .serase-light-beam {
+  opacity: .48;
+}
+
+.serase-inner-shell .serase-ambient-node {
+  opacity: .62;
+}
+
+@keyframes serase-orbit-a-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(-10deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(350deg);
+  }
+}
+
+@keyframes serase-orbit-b-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(18deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(378deg);
+  }
+}
+
+@keyframes serase-beam-cross-a {
+  0% {
+    transform: translate3d(-10vw, -2%, 0) rotate(18deg);
+    opacity: .30;
+  }
+  45% {
+    opacity: .75;
+  }
+  100% {
+    transform: translate3d(92vw, 3%, 0) rotate(18deg);
+    opacity: .42;
+  }
+}
+
+@keyframes serase-beam-cross-b {
+  0% {
+    transform: translate3d(12vw, 2%, 0) rotate(-14deg);
+    opacity: .22;
+  }
+  100% {
+    transform: translate3d(-88vw, -4%, 0) rotate(-14deg);
+    opacity: .52;
+  }
+}
+
+@keyframes serase-node-a {
+  0%   { transform: translate3d(0,0,0) scale(.85); opacity: .35; }
+  50%  { transform: translate3d(8vw,6vh,0) scale(1.28); opacity: 1; }
+  100% { transform: translate3d(15vw,-3vh,0) scale(.95); opacity: .55; }
+}
+
+@keyframes serase-node-b {
+  0%   { transform: translate3d(0,0,0) scale(.9); opacity: .42; }
+  100% { transform: translate3d(-18vw,9vh,0) scale(1.25); opacity: .95; }
+}
+
+@keyframes serase-node-c {
+  0%   { transform: translate3d(0,0,0); opacity: .28; }
+  100% { transform: translate3d(17vw,-10vh,0); opacity: .78; }
+}
+
+@keyframes serase-node-d {
+  0%   { transform: translate3d(0,0,0) scale(.8); opacity: .30; }
+  100% { transform: translate3d(-12vw,-8vh,0) scale(1.2); opacity: .82; }
+}
+
+@media (max-width: 767px) {
+  .serase-orbit-a {
+    width: 150vw;
+    height: 58vw;
+  }
+
+  .serase-orbit-b {
+    width: 125vw;
+    height: 48vw;
+  }
+
+  .serase-inner-shell .serase-orbit {
+    opacity: .28;
+  }
+
+  .serase-light-beam {
+    min-width: 250px;
+    opacity: .28 !important;
+  }
+
+  .serase-ambient-node {
+    transform: scale(.85);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serase-orbit,
+  .serase-light-beam,
+  .serase-ambient-node {
+    animation: none !important;
+  }
+
+  .serase-light-beam {
+    display: none;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .serase-header-surface-transparent {
+    background: transparent !important;
+  }
+}
